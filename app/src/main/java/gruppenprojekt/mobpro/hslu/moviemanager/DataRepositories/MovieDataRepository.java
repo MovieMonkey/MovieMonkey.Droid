@@ -8,6 +8,7 @@ import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepository;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.DataAccess;
+import gruppenprojekt.mobpro.hslu.moviemanager.R;
 
 public class MovieDataRepository implements DataRepository<Movie> {
 

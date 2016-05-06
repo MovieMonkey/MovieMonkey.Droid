@@ -4,6 +4,8 @@ public class Movie {
     private int id;
     private String name;
 
+    public Movie(){}
+
     public Movie(String name){
         this.name = name;
     }
