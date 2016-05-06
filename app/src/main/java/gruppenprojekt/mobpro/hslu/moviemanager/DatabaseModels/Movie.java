@@ -1,4 +1,4 @@
-package gruppenprojekt.mobpro.hslu.moviemanager.DataAccess;
+package gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels;
 
 public class Movie {
     private int id;
@@ -6,6 +6,10 @@ public class Movie {
 
     public Movie(String name){
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

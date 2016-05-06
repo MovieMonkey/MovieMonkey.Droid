@@ -1,8 +1,8 @@
-package gruppenprojekt.mobpro.hslu.moviemanager.DataAccess;
+package gruppenprojekt.mobpro.hslu.moviemanager.Interfaces;
 
-        import java.util.List;
+import java.util.List;
 
-public interface DataAccess {
+public interface DataAccess<T> {
     void save(T itemToSave);
 
     void delete(T itemToDelete);
