@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">MovieManager</string>
 
+    <!-- titles -->
+    <string name="title_movie_list">movie list</string>
+    <string name="title_favorites">favorites</string>
+    <string name="title_backup">backup</string>
+
+    <!-- labels -->
+    <string name="label_slogan">Your Movie Manager</string>
+
+    <!-- texts -->
     <string name="text_placeholder">[no name]</string>
 </resources>
