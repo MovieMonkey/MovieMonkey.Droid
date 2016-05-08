@@ -1,17 +1,14 @@
-package applysolutions.com.moneyfoxdroid.DataRepositories;
+package gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories;
 
-import android.app.Activity;
 import android.app.Application;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import applysolutions.com.moneyfoxdroid.DatabaseModels.Account;
-import applysolutions.com.moneyfoxdroid.Interfaces.DataAccess;
-import applysolutions.com.moneyfoxdroid.Interfaces.DataRepository;
-import applysolutions.com.moneyfoxdroid.MyApp;
-import applysolutions.com.moneyfoxdroid.R;
+import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
+import gruppenprojekt.mobpro.hslu.moviemanager.DataRepository;
+import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
+import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.DataAccess;
+import gruppenprojekt.mobpro.hslu.moviemanager.R;
 
 public class MovieDataRepository implements DataRepository<Movie> {
 
@@ -20,7 +17,7 @@ public class MovieDataRepository implements DataRepository<Movie> {
     public Application application;
 
     public MovieDataRepository(MovieDataAccess movieDataAccess){
-        accountDataAccess = movieDataAccess;
+        movieDataAccess = movieDataAccess;
 
         loadCache();
     }
@@ -57,8 +54,8 @@ public class MovieDataRepository implements DataRepository<Movie> {
     @Override
     public void save(Movie itemToSave) {
 
-        if(itemToSave.getName().isEmpty()){
-            itemToSave.setName(application.getResources().getString(R.string.text_placeholder));
+        if(itemToSave.getOriginalTitle().isEmpty()){
+            itemToSave.setOriginalTitle(application.getResources().getString(R.string.text_placeholder));
         }
 
         movieDataAccess.save(itemToSave);
