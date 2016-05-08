@@ -8,5 +8,5 @@
           android:layout_gravity="start"
           android:fitsSystemWindows="true"
           android:theme="@style/AppTheme"
-          local:headerLayout="@layout/fragment_navigation_header"
+          local:headerLayout="@layout/nav_header_main"
           local:menu="@menu/navigation_drawer" />
