@@ -38,6 +38,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.addDrawerListener(drawerToggle);
             drawerToggle.syncState();
         }
+
+        loadFirstFragment();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void loadFirstFragment(){
+        MovieListFragment fragment = MovieListFragment.newInstance();
+        String tag = fragment.getTag();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(android.support.design.R.anim.abc_fade_in, android.support.design.R.anim.abc_fade_out);
+
+        transaction.replace(R.id.content_frame, fragment, tag);
+        transaction.commit();
     }
 
     @Override

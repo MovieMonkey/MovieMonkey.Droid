@@ -8,4 +8,6 @@
 
     <!-- font definitions -->
     <dimen name="text_medium">15sp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
