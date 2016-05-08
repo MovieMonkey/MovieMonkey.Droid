@@ -54,8 +54,8 @@ public class MovieDataRepository implements DataRepository<Movie> {
     @Override
     public void save(Movie itemToSave) {
 
-        if(itemToSave.getName().isEmpty()){
-            itemToSave.setName(application.getResources().getString(R.string.text_placeholder));
+        if(itemToSave.getOriginalTitle().isEmpty()){
+            itemToSave.setOriginalTitle(application.getResources().getString(R.string.text_placeholder));
         }
 
         movieDataAccess.save(itemToSave);
