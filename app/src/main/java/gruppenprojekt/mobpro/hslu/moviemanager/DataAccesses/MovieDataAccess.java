@@ -16,7 +16,6 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
 
     @Override
     public void save(Movie itemToSave) {
-
     }
 
     @Override

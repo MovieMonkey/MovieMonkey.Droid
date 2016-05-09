@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Movie {
     private int id;
-    private int tmdb_Id;
-    private int imdb_Id;
+    private int tmdbId;
+    private int imdbId;
     private int year;
     private String originalTitle;
     private List<String> genre;
     private String overview;
-    private String thumpPathBigLocal;
-    private String thumpPathSmallLocal;
-    private String thumpPathRemote;
+    private String thumbPathBigLocal;
+    private String thumbPathSmallLocal;
+    private String thumbPathRemote;
     private List<String> actors;
     private double rating;
 
@@ -26,17 +26,17 @@ public class Movie {
     }
 
     public int getTmdbId() {
-        return tmdb_Id;
+        return tmdbId;
     }
-    public void setTmdbId(int tmdb_Id) {
-        this.tmdb_Id = tmdb_Id;
+    public void setTmdbId(int tmdbId) {
+        this.tmdbId = tmdbId;
     }
 
     public int getImdbId() {
-        return imdb_Id;
+        return imdbId;
     }
-    public void setImdbId(int imdb_Id) {
-        this.imdb_Id = imdb_Id;
+    public void setImdbId(int imdbId) {
+        this.imdbId = imdbId;
     }
 
     public int getYear() {
@@ -68,24 +68,24 @@ public class Movie {
     }
 
     public String getThumbPathBigLocal() {
-        return thumpPathBigLocal;
+        return thumbPathBigLocal;
     }
     public void setThumbPathBigLocal(String thumpPathBigLocal) {
-        this.thumpPathBigLocal = thumpPathBigLocal;
+        this.thumbPathBigLocal = thumpPathBigLocal;
     }
 
     public String getThumbPathSmallLocal() {
-        return thumpPathSmallLocal;
+        return thumbPathSmallLocal;
     }
     public void setThumbPathSmallLocal(String thumpPathSmallLocal) {
-        this.thumpPathSmallLocal = thumpPathSmallLocal;
+        this.thumbPathSmallLocal = thumpPathSmallLocal;
     }
 
     public String getThumbPathRemote() {
-        return thumpPathRemote;
+        return thumbPathRemote;
     }
     public void setThumbPathRemote(String thumpPathRemote) {
-        this.thumpPathRemote = thumpPathRemote;
+        this.thumbPathRemote = thumpPathRemote;
     }
 
     public List<String> getActors() {
