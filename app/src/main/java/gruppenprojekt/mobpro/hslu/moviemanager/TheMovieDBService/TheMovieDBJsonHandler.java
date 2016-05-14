@@ -54,7 +54,7 @@ public class TheMovieDBJsonHandler {
                     currMovie.setOriginalTitle(jsonObject.optString("original_title").toString());
                     currMovie.setOverview(jsonObject.optString("overview").toString());
                     currMovie.setYear(getYearFromReleaseDate(jsonObject.optString("release_date").toString()));
-                    currMovie.setGenre(generateGenresFromIDs(jsonArrayGenre));
+                    currMovie.setGenre(getGenreListAsString(jsonArrayGenre));
                     currMovie.setTmdbId(jsonObject.optInt("id"));
                     currMovie.setRating(jsonObject.optDouble("vote_average"));
 
@@ -71,7 +71,25 @@ public class TheMovieDBJsonHandler {
         return null;
     }
 
-    private List<String> generateGenresFromIDs(JSONArray newJsonArray){
+    private String getGenreListAsString(JSONArray newJsonArray) {
+        List<String> genreList = getGenreList(newJsonArray);
+
+        StringBuilder builder = new StringBuilder();
+
+        for(int x = 0; x < genreList.size(); x++){
+            if(x == 0){
+                builder.append(genreList.get(x));
+            }
+            else{
+                builder.append(", ");
+                builder.append(genreList.get(x));
+            }
+        }
+
+        return builder.toString();
+    }
+
+    private List<String> getGenreList(JSONArray newJsonArray){
         List<String> genres = new ArrayList<>();
 
         if(newJsonArray != null)

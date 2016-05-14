@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService.TheMovieDBService;
 
-public class SearchActivity extends Activity{
+public class SearchActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +16,7 @@ public class SearchActivity extends Activity{
 
     public void startSearchMovie(View v) {
         EditText editText = (EditText) findViewById(R.id.searchKey);
-        TheMovieDBService service = new TheMovieDBService();
+        TheMovieDBService service = new TheMovieDBService(this);
         service.searchMovie(editText.getText().toString());
     }
 }

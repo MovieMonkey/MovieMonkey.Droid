@@ -8,7 +8,7 @@ public class Movie {
     private int imdbId;
     private int year;
     private String originalTitle;
-    private List<String> genre;
+    private String genre;
     private String overview;
     private String thumbPathBigLocal;
     private String thumbPathSmallLocal;
@@ -53,10 +53,10 @@ public class Movie {
         this.originalTitle = originalTitle;
     }
 
-    public List<String> getGenre() {
+    public String getGenre() {
         return genre;
     }
-    public void setGenre(List<String> genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

@@ -24,6 +24,11 @@
                 android:id="@+id/button_http_server"
                 android:text="Klick Mich"
                 android:onClick="startSearchMovie"/>
+        <!--   <fragment
+                android:name="gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListSearchFragment"
+                android:id="@+id/MovieList_Search_Fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/> -->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
