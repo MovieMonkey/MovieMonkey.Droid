@@ -5,7 +5,11 @@
     android:layout_height="fill_parent"
     tools:context=".SearchActivity"
     android:baselineAligned="false"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar_actionbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Search for a movie with TMDB"
-            android:textSize="20sp"/>
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <fragment
