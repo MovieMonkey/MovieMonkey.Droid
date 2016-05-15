@@ -20,7 +20,8 @@
 -->
         <activity
             android:name=".SearchActivity"
-            android:label="Search Movie">
+            android:label="Search Movie"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

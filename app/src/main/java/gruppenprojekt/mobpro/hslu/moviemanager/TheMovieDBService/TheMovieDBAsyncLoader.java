@@ -6,10 +6,8 @@ import android.util.Log;
 import java.net.URL;
 import java.util.List;
 
-import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.AsyncDelegate;
-import gruppenprojekt.mobpro.hslu.moviemanager.SearchActivity;
 
 public class TheMovieDBAsyncLoader extends AsyncTask<Void, Void, List<Movie>>
 {

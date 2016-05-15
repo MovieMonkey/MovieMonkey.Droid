@@ -1,5 +1,7 @@
 package gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -27,8 +29,30 @@ public class TheMovieDBHttpHandler {
         return resultText;
     }
 
+    public Bitmap getBitmapFromHttpContent(URL newUrl){
+        Bitmap resultBitmap;
+        InputStream content = getHttpContent(newUrl);
+        resultBitmap = getBitmapFromInputStream(content);
+
+        if(content != null)
+        {
+            try {
+                content.close();
+            } catch (IOException ex){
+                Log.e("MovieManager", "Couldn't close HTTPInputStream");
+            }
+        }
+
+        return resultBitmap;
+    }
+
     private InputStream getHttpContent(URL newURL){
         InputStream content = null;
+
+        if(newURL == null)
+            Log.i("MovieManager", "getHttpContent: URL is null");
+        else
+            Log.i("MovieManager", "getHttpContent: " + newURL.toString());
 
         try{
             HttpURLConnection httpConnection = (HttpURLConnection) newURL.openConnection();
@@ -46,6 +70,10 @@ public class TheMovieDBHttpHandler {
         } finally {
             return content;
         }
+    }
+
+    private Bitmap getBitmapFromInputStream(InputStream newInputStream) {
+        return BitmapFactory.decodeStream(newInputStream);
     }
 
     private String getTextFromInputStream(InputStream newInputStream) {

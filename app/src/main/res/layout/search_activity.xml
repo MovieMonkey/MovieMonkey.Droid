@@ -5,30 +5,30 @@
     android:layout_height="fill_parent"
     tools:context=".SearchActivity"
     android:background="#000000"
-    android:baselineAligned="false">
-    <ScrollView
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/searchKey"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:text="Search for a movie with TMDB"
+            android:textColor="#DDDDDD"
+            android:textSize="20sp"/>
+    </LinearLayout>
 
-                android:id="@+id/button_http_server"
-                android:text="Klick Mich"
-                android:onClick="startSearchMovie"/>
-        <!--   <fragment
-                android:name="gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListSearchFragment"
-                android:id="@+id/MovieList_Search_Fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/> -->
-        </LinearLayout>
-    </ScrollView>
+    <fragment
+        android:name="gruppenprojekt.mobpro.hslu.moviemanager.Fragments.SearchActivityTopFragment"
+        android:id="@+id/fragment_search_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <fragment
+        android:name="gruppenprojekt.mobpro.hslu.moviemanager.Fragments.SearchActivityBottomFragment"
+        android:id="@+id/fragment_search_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

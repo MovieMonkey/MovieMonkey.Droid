@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/search_list_view_row_image"
+            android:layout_width="30dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout"
+            android:layout_toStartOf="@+id/search_list_row_year"
+            android:layout_toEndOf="@+id/search_list_view_row_image">
+
+            <TextView
+                android:id="@+id/search_list_row_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#CCCCCC"
+                android:textSize="20sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Batman: The Dark Knight"/>
+
+            <TextView
+                android:id="@+id/search_list_row_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#CCCCCC"
+                android:textSize="13sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Batman: The Dark Knight"
+                android:layout_below="@+id/search_list_row_title"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/search_list_row_year"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#CCCCCC"
+            android:textSize="25sp"
+            android:gravity="center_vertical|right"
+
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="2013"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#222222"/>
+</LinearLayout>

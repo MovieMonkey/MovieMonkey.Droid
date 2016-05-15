@@ -1,13 +1,18 @@
 package gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
-import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
+import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.CustomMovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.AsyncDelegate;
 import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.MovieGrabberService;
@@ -19,6 +24,7 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
     private final String POSTER_THUMBNAIL_PATH = "https://image.tmdb.org/t/p/w185";
     private final String POSTER_ORIGINAL_PATH = "https://image.tmdb.org/t/p/original";
     private Context context;
+
 
     public TheMovieDBService(Context newContext){
         this.context = newContext;
@@ -44,10 +50,12 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
 
     @Override
     public void asyncComplete(List<Movie> movieList){
-      Log.i("MovieManager", "AsyncComplete");
+        Log.i("MovieManager", "AsyncComplete");
+        Log.i("MovieManager", "Found " + movieList.size() + " entries!");
 
-        //MovieAdapter adapter = new MovieAdapter(this.context, R.layout.fragment_list_view,movieList);
-        //setListAdapter(adapter);
+        ListView listView = (ListView) ((Activity) this.context).findViewById(R.id.search_ListView);
+        CustomMovieAdapter adapter = new CustomMovieAdapter((Activity) this.context, movieList, POSTER_THUMBNAIL_PATH);
+        listView.setAdapter(adapter);
     }
 
     private URL setURL(String newString){
