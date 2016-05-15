@@ -3,8 +3,6 @@ package gruppenprojekt.mobpro.hslu.moviemanager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class SearchActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_activity);
+        setContentView(R.layout.activity_search);
     }
 
     public void startSearchMovie(View v) {
