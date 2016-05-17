@@ -2,6 +2,7 @@ package gruppenprojekt.mobpro.hslu.moviemanager.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -89,7 +90,9 @@ public class CustomMovieAdapter extends ArrayAdapter<Movie>{
             new TheMovieDBImageAsyncLoader(
                     position,
                     holder,
-                    setURL(posterThumbnailPath + movieItem.getThumbPathRemote())
+                    setURL(posterThumbnailPath + movieItem.getThumbPathRemote()),
+                    movieItem.getThumbPathRemote(),
+                    new ContextWrapper(this.context)
             ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,null);
         }
 

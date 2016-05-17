@@ -46,6 +46,12 @@ public class TheMovieDBHttpHandler {
         return resultBitmap;
     }
 
+
+    public InputStream getInputStreamFromHttpContent(URL newUrl){
+        return getHttpContent(newUrl);
+    }
+
+
     private InputStream getHttpContent(URL newURL){
         InputStream content = null;
 
