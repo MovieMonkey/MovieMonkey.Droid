@@ -13,7 +13,10 @@ import java.net.URL;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
+
 public class TheMovieDBHttpHandler {
+    private final boolean SHOW_INFO = false;
 
     public String getTextFromHttpContent(URL newUrl){
         String resultText;
@@ -53,27 +56,32 @@ public class TheMovieDBHttpHandler {
 
 
     private InputStream getHttpContent(URL newURL){
+        HelperClass.newInfoLine(this,"getHttpContent: Begin",SHOW_INFO);
+
         InputStream content = null;
 
-        if(newURL == null)
-            Log.i("MovieManager", "getHttpContent: URL is null");
-        else
-            Log.i("MovieManager", "getHttpContent: " + newURL.toString());
+        if(newURL == null){
+            HelperClass.newInfoLine(this,"getHttpContent: URL is null",SHOW_INFO);
+        } else {
+            HelperClass.newInfoLine(this,"getHttpContent: " + newURL.toString(),SHOW_INFO);
+        }
 
         try{
             HttpURLConnection httpConnection = (HttpURLConnection) newURL.openConnection();
             httpConnection.setInstanceFollowRedirects(true);
             httpConnection.connect();
 
+            HelperClass.newInfoLine(this,"getHttpContent: ResponseCode: " + httpConnection.getResponseCode(),SHOW_INFO);
+
             if(httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 content = httpConnection.getInputStream();
-                Log.i("MovieManager", httpConnection.getResponseMessage());
             }
         } catch (SSLPeerUnverifiedException ex) {
             Log.e("MovieManager", "Not a trusted SSL-Certificate! \"" + this.getClass() + "\"");
         } catch (IOException ex) {
             Log.e("MovieManager", "Fehler in \"" + this.getClass() + "\"");
         } finally {
+            HelperClass.newInfoLine(this,"getHttpContent: End",SHOW_INFO);
             return content;
         }
     }
@@ -83,25 +91,26 @@ public class TheMovieDBHttpHandler {
     }
 
     private String getTextFromInputStream(InputStream newInputStream) {
+        HelperClass.newInfoLine(this,"getTextFromInputStream: Begin",SHOW_INFO);
+
         StringBuilder text = new StringBuilder();
 
         if(newInputStream != null){
             String line;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(newInputStream));
 
-            try{
+            try(BufferedReader reader = new BufferedReader(new InputStreamReader(newInputStream))){
                 while((line = reader.readLine()) != null){
                     text.append(line);
                     text.append("\n");
                 }
 
-                reader.close();
-                Log.i("MovieManager", "Text gelesen");
+                HelperClass.newInfoLine(this,"getTextFromInputStream: Text gelesen",SHOW_INFO);
             } catch(IOException ex){
                 Log.e("MovieManager", "Fehler beim Extrahieren des Textes!");
             }
         }
 
+        HelperClass.newInfoLine(this,"getTextFromInputStream: End",SHOW_INFO);
         return text.toString();
     }
 }

@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 public class TheMovieDBJsonHandler {
-
+    private final boolean SHOW_INFO = true;
     private Map<Integer, String> genreIDs = new HashMap<>();
 
     public TheMovieDBJsonHandler(){}
@@ -37,7 +38,34 @@ public class TheMovieDBJsonHandler {
         }
     }
 
+
+    public int getTotalPages(String newJson){
+        return getRootInfo(newJson, "total_pages");
+    }
+
+
+    public int getTotalResults(String newJson){
+        return getRootInfo(newJson, "total_results");
+    }
+
+
+    private int getRootInfo(String newJson, String newKey){
+        int value = 0;
+
+        try{
+            JSONObject jsonRootObject = new JSONObject(newJson);
+            value = jsonRootObject.optInt(newKey,0);
+        } catch(JSONException ex) {
+            Log.e("MovieManager", "JSON parsing failed!");
+        }
+
+        return value;
+    }
+
+
     public List<Movie> getMovieList(String newJson) {
+        HelperClass.newInfoLine(this,"getMovieList: Begin",SHOW_INFO);
+
         List<Movie> movieList = new ArrayList<>();
 
         try{
@@ -50,25 +78,24 @@ public class TheMovieDBJsonHandler {
                     JSONArray jsonArrayGenre = jsonObject.optJSONArray("genre_ids");
 
                     Movie currMovie = new Movie();
-                    currMovie.setThumbPathRemote(jsonObject.optString("poster_path").toString());
-                    currMovie.setOriginalTitle(jsonObject.optString("original_title").toString());
-                    currMovie.setOverview(jsonObject.optString("overview").toString());
+                    currMovie.setThumbPathRemote(jsonObject.optString("poster_path","").toString());
+                    currMovie.setOriginalTitle(jsonObject.optString("original_title","No title found").toString());
+                    currMovie.setOverview(jsonObject.optString("overview","No Overview found").toString());
                     currMovie.setYear(getYearFromReleaseDate(jsonObject.optString("release_date").toString()));
                     currMovie.setGenre(getGenreListAsString(jsonArrayGenre));
-                    currMovie.setTmdbId(jsonObject.optInt("id"));
-                    currMovie.setRating(jsonObject.optDouble("vote_average"));
+                    currMovie.setTmdbId(jsonObject.optInt("id",0));
+                    currMovie.setRating(jsonObject.optDouble("vote_average",0.0));
 
                     movieList.add(currMovie);
                 }
             }
-
-            return movieList;
-
         } catch(JSONException ex) {
+            movieList.clear();
             Log.e("MovieManager", "JSON parsing failed!");
         }
 
-        return null;
+        HelperClass.newInfoLine(this,"getMovieList: End",SHOW_INFO);
+        return movieList;
     }
 
     private String getGenreListAsString(JSONArray newJsonArray) {
@@ -113,8 +140,13 @@ public class TheMovieDBJsonHandler {
     }
 
     private int getYearFromReleaseDate(String releaseDate){
-        String[] split = releaseDate.split("-");
+        int year = 0;
 
-        return Integer.parseInt(split[0]);
+        if(releaseDate.length() != 0){
+            String[] split = releaseDate.split("-");
+            year = Integer.parseInt(split[0]);
+        }
+
+        return year;
     }
 }

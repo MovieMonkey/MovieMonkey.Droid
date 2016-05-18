@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListFragment;
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //prepare environment
+        HelperClass.prepareEnvironment(getApplicationContext());
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 

@@ -1,12 +1,8 @@
 package gruppenprojekt.mobpro.hslu.moviemanager.Adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.MovieHolder;
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
 import gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService.TheMovieDBImageAsyncLoader;
 
@@ -27,7 +22,7 @@ import gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService.TheMovieDBImage
  * Created by Adrian Kauz on 14.05.2016.
  */
 public class CustomMovieAdapter extends ArrayAdapter<Movie>{
-
+    private final boolean SHOW_INFO = false;
     private final Activity context;
     private final List<Movie> items;
     private String posterThumbnailPath;
@@ -57,7 +52,8 @@ public class CustomMovieAdapter extends ArrayAdapter<Movie>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        Log.i("MovieManager","Position: " + position + ": " + items.get(position).getThumbPathRemote());
+        HelperClass.newInfoLine(this,"getView: Begin",SHOW_INFO);
+        HelperClass.newInfoLine(this,"getView: Current position: " + position + ": " + items.get(position).getThumbPathRemote(),SHOW_INFO);
 
         View view = convertView;
         MovieHolder holder;
@@ -90,21 +86,13 @@ public class CustomMovieAdapter extends ArrayAdapter<Movie>{
             new TheMovieDBImageAsyncLoader(
                     position,
                     holder,
-                    setURL(posterThumbnailPath + movieItem.getThumbPathRemote()),
+                    HelperClass.setURL(posterThumbnailPath + movieItem.getThumbPathRemote()),
                     movieItem.getThumbPathRemote(),
                     new ContextWrapper(this.context)
             ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,null);
         }
 
+        HelperClass.newInfoLine(this,"getView: End",SHOW_INFO);
         return view;
-    }
-
-    private URL setURL(String newString){
-        try{
-            return new URL(newString);
-        } catch(MalformedURLException ex){
-            Log.i("MovieManager","MalformedURLException: " + newString);
-            return null;
-        }
     }
 }
