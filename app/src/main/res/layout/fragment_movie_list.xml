@@ -3,6 +3,10 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ListView
+        android:id="@+id/list_view_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"

@@ -18,7 +18,6 @@ import gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListFragment;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
     private DrawerLayout drawerLayout;
 
     @Override

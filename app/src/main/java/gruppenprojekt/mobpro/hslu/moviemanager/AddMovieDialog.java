@@ -48,8 +48,7 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MovieDataAccess dataAccess = new MovieDataAccess(currentActivity);
-                new MovieDataRepository(dataAccess)
+                new MovieDataRepository(new MovieDataAccess(currentActivity))
                         .save(selectedMovie);
 
                 Toast.makeText(currentActivity, "Erfolgreich gespeichert",
