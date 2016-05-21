@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 /**
  * Created by ninop on 20/05/2016.
@@ -18,6 +22,12 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
 
     private Activity currentActivity;
     private Movie selectedMovie;
+
+    private ImageView imageViewThumbnail;
+    private TextView textViewTitle;
+    private TextView textViewGenre;
+    private TextView textViewYear;
+    private TextView textViewDescription;
 
     public AddMovieDialog(Activity activity, Movie movie) {
         super(activity);
@@ -38,8 +48,15 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new MovieDataRepository(new MovieDataAccess(currentActivity))
+                MovieDataAccess dataAccess = new MovieDataAccess(currentActivity);
+                new MovieDataRepository(dataAccess)
                         .save(selectedMovie);
+
+                Toast.makeText(currentActivity, "Erfolgreich gespeichert",
+                        Toast.LENGTH_LONG).show();
+
+                currentActivity.finish();
+
                 dismiss();
             }
         });
@@ -50,6 +67,19 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
                 dismiss();
             }
         });
+
+        imageViewThumbnail = (ImageView) findViewById(R.id.search_list_view_row_image);
+        textViewTitle = (TextView) findViewById(R.id.search_list_row_title);
+        textViewGenre = (TextView) findViewById(R.id.search_list_row_genre);
+        textViewYear = (TextView) findViewById(R.id.search_list_row_year);
+        textViewDescription = (TextView) findViewById(R.id.text_view_movie_description);
+
+        // show image
+
+        textViewTitle.setText(selectedMovie.getOriginalTitle());
+        textViewGenre.setText(selectedMovie.getGenre());
+        textViewYear.setText(String.valueOf(selectedMovie.getYear()));
+        textViewDescription.setText(selectedMovie.getOverview());
     }
 
     @Override

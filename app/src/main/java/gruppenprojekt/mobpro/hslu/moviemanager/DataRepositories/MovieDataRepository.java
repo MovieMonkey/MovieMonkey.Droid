@@ -17,7 +17,7 @@ public class MovieDataRepository implements DataRepository<Movie> {
     public Application application;
 
     public MovieDataRepository(MovieDataAccess movieDataAccess){
-        movieDataAccess = movieDataAccess;
+        this.movieDataAccess = movieDataAccess;
 
         loadCache();
     }
