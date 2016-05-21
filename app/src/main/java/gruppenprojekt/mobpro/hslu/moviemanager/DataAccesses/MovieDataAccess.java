@@ -24,7 +24,10 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, itemToSave.getOriginalTitle());
+        values.put(KEY_TITLE, itemToSave.getOriginalTitle());
+        values.put(KEY_GENRE, itemToSave.getGenre());
+        values.put(KEY_YEAR, itemToSave.getYear());
+        values.put(KEY_OVERVIEW, itemToSave.getOverview());
 
         if(itemToSave.getId() == 0){
             db.insert(TABLE_MOVIES,
@@ -65,6 +68,9 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
                     movie = new Movie();
                     movie.setId(Integer.parseInt(cursor.getString(0)));
                     movie.setOriginalTitle(cursor.getString(1));
+                    movie.setGenre(cursor.getString(2));
+                    movie.setYear(cursor.getInt(3));
+                    movie.setOverview(cursor.getString(4));
 
                     movies.add(movie);
                 } while (cursor.moveToNext());

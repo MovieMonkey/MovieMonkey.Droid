@@ -1,4 +1,4 @@
-package gruppenprojekt.mobpro.hslu.moviemanager;
+package gruppenprojekt.mobpro.hslu.moviemanager.Interfaces;
 
 import java.util.List;
 
@@ -9,22 +9,7 @@ import java.util.List;
  */
 public interface DataRepository<T> {
 
-    /**
-     * Gives access to the cache with all the loaded objects.
-     * This collection mirrors the content of the database.
-     * @return Returns all cached objects. This is identical to the values in the DB.
-     */
-    List<T> getCache();
-
-    /**
-     * Searches for an concrete id in the cache and will return this object if found.
-     * Otherwise a new object is created and return
-     * @param id id to search for in the cache.
-     * @return the item found or a new created.
-     */
-    T getFromCache(int id);
-
-    void loadCache();
+    List<T> load();
 
     void save(T itemToSave);
 

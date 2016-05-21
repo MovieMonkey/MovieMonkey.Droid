@@ -32,6 +32,8 @@ public class MovieListFragment extends Fragment {
     private FloatingActionButton floatingActionButton;
     private ListView listView;
 
+    private MovieDataRepository dataRepository;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,10 +42,9 @@ public class MovieListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
 
+        dataRepository = new MovieDataRepository(new MovieDataAccess(getActivity()));
+
         listView = (ListView) view.findViewById(R.id.list_view_movie);
-        listView.setAdapter(new CustomMovieAdapter(getActivity(),
-                new MovieDataRepository(new MovieDataAccess(getActivity())).getCache(),
-                POSTER_THUMBNAIL_PATH));
 
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab_add);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +55,14 @@ public class MovieListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        listView.setAdapter(new CustomMovieAdapter(getActivity(),
+                dataRepository.load(),
+                POSTER_THUMBNAIL_PATH));
     }
 }

@@ -15,7 +15,10 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
     //------------ Columns ------------
     //Shared
     public static final String KEY_ID = "Id";
-    public static final String KEY_NAME = "Name";
+    public static final String KEY_TITLE = "Title";
+    public static final String KEY_GENRE = "Genre";
+    public static final String KEY_YEAR = "Year";
+    public static final String KEY_OVERVIEW = "Overview";
 
     public BasicDataAccess(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,6 +37,9 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
 
     private static String CREATE_MOVIE_TABLE = "CREATE TABLE " + TABLE_MOVIES + "(" +
             KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_NAME + " TEXT " +
+            KEY_TITLE + " TEXT, " +
+            KEY_GENRE + " TEXT, " +
+            KEY_YEAR + " INTEGER, " +
+            KEY_OVERVIEW + " TEXT " +
             ")";
 }
