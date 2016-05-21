@@ -3,16 +3,13 @@ package gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
-import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.CustomMovieAdapter;
+import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.AsyncDelegate;
@@ -56,7 +53,7 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
         Log.i("MovieManager", "Found " + movieList.size() + " entries!");
 
         ListView listView = (ListView) ((Activity) this.context).findViewById(R.id.search_ListView);
-        CustomMovieAdapter adapter = new CustomMovieAdapter((Activity) this.context, movieList, POSTER_THUMBNAIL_PATH);
+        MovieAdapter adapter = new MovieAdapter((Activity) this.context, movieList, POSTER_THUMBNAIL_PATH);
         listView.setAdapter(adapter);
     }
 

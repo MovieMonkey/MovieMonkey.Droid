@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.CustomMovieAdapter;
+import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
@@ -61,7 +61,7 @@ public class MovieListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        listView.setAdapter(new CustomMovieAdapter(getActivity(),
+        listView.setAdapter(new MovieAdapter(getActivity(),
                 dataRepository.load(),
                 POSTER_THUMBNAIL_PATH));
     }
