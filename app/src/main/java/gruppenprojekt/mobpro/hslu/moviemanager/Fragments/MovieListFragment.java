@@ -54,7 +54,7 @@ public class MovieListFragment extends Fragment {
                 Movie movie = (Movie)listView.getItemAtPosition(i);
 
                 Intent intent = new Intent(getActivity(), DetailsMovieActivity.class);
-                intent.putExtra(DetailsMovieActivity.SELECTED_MOVIE_TAG, movie);
+                intent.putExtra(DetailsMovieActivity.SELECTED_MOVIE_ID_TAG, movie.getId());
                 startActivity(intent);
             }
         });

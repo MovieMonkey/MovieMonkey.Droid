@@ -14,4 +14,6 @@ public interface DataRepository<T> {
     void save(T itemToSave);
 
     void delete(T itemToDelete);
+
+    T getById(int id);
 }

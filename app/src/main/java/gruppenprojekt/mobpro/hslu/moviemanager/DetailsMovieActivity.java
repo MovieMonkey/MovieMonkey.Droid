@@ -8,12 +8,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
+import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 
 public class DetailsMovieActivity extends AppCompatActivity {
 
-    public static final String SELECTED_MOVIE_TAG = "selectedMovie";
+    public static final String SELECTED_MOVIE_ID_TAG = "selected_movie_id";
 
+    private MovieDataRepository dataRepository;
     private Movie selectedMovie;
 
     private ImageView imageViewThumbnail;
@@ -31,7 +34,8 @@ public class DetailsMovieActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        selectedMovie = (Movie) getIntent().getSerializableExtra(SELECTED_MOVIE_TAG);
+        dataRepository = new MovieDataRepository(new MovieDataAccess(this));
+        selectedMovie = dataRepository.getById(getIntent().getIntExtra(SELECTED_MOVIE_ID_TAG, 0));
 
         setTitle(selectedMovie.getOriginalTitle());
 

@@ -39,4 +39,9 @@ public class MovieDataRepository implements DataRepository<Movie> {
     public void delete(Movie itemToDelete) {
         movieDataAccess.delete(itemToDelete);
     }
+
+    @Override
+    public Movie getById(int id) {
+        return movieDataAccess.getById(id);
+    }
 }
