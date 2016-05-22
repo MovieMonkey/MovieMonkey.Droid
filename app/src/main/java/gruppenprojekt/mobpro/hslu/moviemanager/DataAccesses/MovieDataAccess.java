@@ -29,6 +29,7 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
         values.put(KEY_YEAR, itemToSave.getYear());
         values.put(KEY_OVERVIEW, itemToSave.getOverview());
         values.put(KEY_IMAGE_ID, itemToSave.getImageID());
+        values.put(KEY_IS_FAVORITE, itemToSave.getIsFavorite() ? 1 : 0);
 
         if(itemToSave.getId() == 0){
             db.insert(TABLE_MOVIES,
@@ -109,6 +110,7 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
         movie.setYear(cursor.getInt(3));
         movie.setOverview(cursor.getString(4));
         movie.setImageID(cursor.getString(5));
+        movie.setIsFavorite(cursor.getInt(6) == 1);
 
         return movie;
     }

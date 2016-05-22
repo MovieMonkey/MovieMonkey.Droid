@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include
         layout="@layout/toolbar_actionbar" />
 
     <RelativeLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -75,12 +77,5 @@
         android:layout_height="wrap_content"
         android:textColor="#222222"
         android:text="Content und so..."/>
-
-    <Button
-        android:id="@+id/button_mark_favorite"
-        android:text="Als Favorit markieren"
-        android:layout_marginTop="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

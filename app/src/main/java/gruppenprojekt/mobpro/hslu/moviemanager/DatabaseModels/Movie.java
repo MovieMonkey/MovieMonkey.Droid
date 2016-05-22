@@ -17,6 +17,7 @@ public class Movie implements Comparable<Movie> {
     private List<String> actors;
     private double rating;
     private Bitmap thumbnail;
+    private Boolean isFavorite;
 
     public Movie(){}
 
@@ -88,6 +89,18 @@ public class Movie implements Comparable<Movie> {
     }
     public void setThumbnail(Bitmap newThumbnail){
         this.thumbnail = newThumbnail;
+    }
+
+    public Boolean getIsFavorite() {
+        if(isFavorite == null){
+            return false;
+        }
+
+        return isFavorite;
+    }
+
+    public void setIsFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
 
     public int compareTo(Movie movieItem){
