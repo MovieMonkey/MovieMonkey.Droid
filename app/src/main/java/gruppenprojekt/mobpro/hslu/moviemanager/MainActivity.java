@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import gruppenprojekt.mobpro.hslu.moviemanager.Fragments.FavoriteListFragment;
 import gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListFragment;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
@@ -81,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_all) {
             MovieListFragment fragment = MovieListFragment.newInstance();
+            tag = fragment.getTag();
+
+            transaction.replace(R.id.content_frame, fragment, tag);
+        } else if(id == R.id.nav_favorites){
+            FavoriteListFragment fragment = FavoriteListFragment.newInstance();
             tag = fragment.getTag();
 
             transaction.replace(R.id.content_frame, fragment, tag);

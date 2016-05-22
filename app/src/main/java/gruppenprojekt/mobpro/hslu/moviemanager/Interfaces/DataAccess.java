@@ -9,5 +9,7 @@ public interface DataAccess<T> {
 
     List<T> loadList();
 
+    List<T> loadList(boolean filterFavorites);
+
     T getById(int id);
 }

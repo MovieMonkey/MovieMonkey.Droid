@@ -56,12 +56,19 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
         db.close();
     }
 
-    @Override
     public List<Movie> loadList() {
+        return loadList(false);
+    }
+
+    @Override
+    public List<Movie> loadList(boolean filterFavorites) {
         List<Movie> movies = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_MOVIES, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_MOVIES,
+                null,
+                filterFavorites ? KEY_IS_FAVORITE + " = 1" : null,
+                null, null, null, null);
 
         try {
             if (cursor.moveToFirst()) {

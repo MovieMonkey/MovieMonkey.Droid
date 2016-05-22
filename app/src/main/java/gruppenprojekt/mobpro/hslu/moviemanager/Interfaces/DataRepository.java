@@ -11,6 +11,8 @@ public interface DataRepository<T> {
 
     List<T> load();
 
+    List<T> load(boolean filterFavorites);
+
     void save(T itemToSave);
 
     void delete(T itemToDelete);

@@ -22,7 +22,12 @@ public class MovieDataRepository implements DataRepository<Movie> {
 
     @Override
     public List<Movie> load() {
-        return movieDataAccess.loadList();
+        return load(false);
+    }
+
+    @Override
+    public List<Movie> load(boolean filterFavorites) {
+        return movieDataAccess.loadList(filterFavorites);
     }
 
     @Override

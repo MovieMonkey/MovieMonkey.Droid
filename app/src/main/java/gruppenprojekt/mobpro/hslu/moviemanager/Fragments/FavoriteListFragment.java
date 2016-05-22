@@ -18,16 +18,10 @@ import gruppenprojekt.mobpro.hslu.moviemanager.DetailsMovieActivity;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
 import gruppenprojekt.mobpro.hslu.moviemanager.SearchActivity;
 
-public class MovieListFragment extends Fragment {
+public class FavoriteListFragment extends Fragment {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment MovieListFragment.
-     */
-    public static MovieListFragment newInstance() {
-        return new MovieListFragment();
+    public static FavoriteListFragment newInstance() {
+        return new FavoriteListFragment();
     }
 
     private FloatingActionButton floatingActionButton;
@@ -43,7 +37,7 @@ public class MovieListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
 
-        getActivity().setTitle("Filme");
+        getActivity().setTitle("Favoriten");
 
         dataRepository = new MovieDataRepository(new MovieDataAccess(getActivity()));
 
@@ -75,6 +69,6 @@ public class MovieListFragment extends Fragment {
         super.onStart();
 
         listView.setAdapter(new MovieAdapter(getActivity(),
-                dataRepository.load(), true));
+                dataRepository.load(true), true));
     }
 }

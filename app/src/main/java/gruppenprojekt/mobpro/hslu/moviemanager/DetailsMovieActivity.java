@@ -42,7 +42,7 @@ public class DetailsMovieActivity extends AppCompatActivity {
         dataRepository = new MovieDataRepository(new MovieDataAccess(this));
         selectedMovie = dataRepository.getById(getIntent().getIntExtra(SELECTED_MOVIE_ID_TAG, 0));
 
-        setTitle(selectedMovie.getOriginalTitle());
+        setTitle("Details");
 
         imageViewThumbnail = (ImageView) findViewById(R.id.search_list_view_row_image);
         textViewTitle = (TextView) findViewById(R.id.search_list_row_title);
