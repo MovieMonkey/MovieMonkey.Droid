@@ -61,7 +61,7 @@ public class TheMovieDBImageAsyncLoader extends AsyncTask<Void, Void, Bitmap>{
         Bitmap currBitmap;
 
         if(newThumbnail == null){
-            currBitmap = BitmapFactory.decodeResource(cw.getResources(),R.mipmap.moviemanager_default_picture);
+            currBitmap = BitmapFactory.decodeResource(cw.getResources(),R.drawable.moviemanager_default_picture);
         } else {
             currBitmap = newThumbnail;
         }
