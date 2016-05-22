@@ -63,18 +63,9 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
         Cursor cursor = db.query(TABLE_MOVIES, null, null, null, null, null, null);
 
         try {
-            Movie movie;
             if (cursor.moveToFirst()) {
                 do {
-                    movie = new Movie();
-                    movie.setId(Integer.parseInt(cursor.getString(0)));
-                    movie.setOriginalTitle(cursor.getString(1));
-                    movie.setGenre(cursor.getString(2));
-                    movie.setYear(cursor.getInt(3));
-                    movie.setOverview(cursor.getString(4));
-                    movie.setImageID(cursor.getString(5));
-
-                    movies.add(movie);
+                    movies.add(mapCursorToObject(cursor));
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -86,5 +77,39 @@ public class MovieDataAccess extends BasicDataAccess implements DataAccess<Movie
             cursor.close();
         }
         return movies;
+    }
+
+    @Override
+    public Movie getById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_MOVIES, null, KEY_ID + " = " + id, null, null, null, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    return mapCursorToObject(cursor);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch(Exception ex){
+            Log.e("MovieManager", ex.getMessage());
+        }
+        finally {
+            cursor.close();
+        }
+        return null;
+    }
+
+    private Movie mapCursorToObject(Cursor cursor){
+        Movie movie = new Movie();
+        movie.setId(Integer.parseInt(cursor.getString(0)));
+        movie.setOriginalTitle(cursor.getString(1));
+        movie.setGenre(cursor.getString(2));
+        movie.setYear(cursor.getInt(3));
+        movie.setOverview(cursor.getString(4));
+        movie.setImageID(cursor.getString(5));
+
+        return movie;
     }
 }

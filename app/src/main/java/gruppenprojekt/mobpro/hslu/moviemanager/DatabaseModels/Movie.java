@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 import java.util.List;
 
-public class Movie implements Comparable<Movie>, Serializable {
+public class Movie implements Comparable<Movie> {
     private int id;
     private int tmdbId;
     private int imdbId;

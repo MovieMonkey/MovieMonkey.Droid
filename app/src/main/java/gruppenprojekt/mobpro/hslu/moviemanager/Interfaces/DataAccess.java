@@ -8,4 +8,6 @@ public interface DataAccess<T> {
     void delete(T itemToDelete);
 
     List<T> loadList();
+
+    T getById(int id);
 }
