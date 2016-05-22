@@ -76,7 +76,6 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
         textViewYear = (TextView) findViewById(R.id.search_list_row_year);
         textViewDescription = (TextView) findViewById(R.id.text_view_movie_description);
 
-        // show image
         imageViewThumbnail.setImageBitmap(selectedMovie.getThumbnail());
         textViewTitle.setText(selectedMovie.getOriginalTitle());
         textViewGenre.setText(selectedMovie.getGenre());

@@ -27,8 +27,6 @@ public class MovieListFragment extends Fragment {
         return new MovieListFragment();
     }
 
-    private final String POSTER_THUMBNAIL_PATH = "https://image.tmdb.org/t/p/w185";
-
     private FloatingActionButton floatingActionButton;
     private ListView listView;
 
