@@ -2,9 +2,10 @@ package gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie implements Comparable<Movie>{
+public class Movie implements Comparable<Movie>, Serializable {
     private int id;
     private int tmdbId;
     private int imdbId;

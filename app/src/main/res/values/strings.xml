@@ -4,7 +4,7 @@
     <!-- titles -->
     <string name="title_movie_list">movie list</string>
     <string name="title_favorites">favorites</string>
-    <string name="title_backup">backup</string>
+    <string name="title_info">info</string>
 
     <!-- labels -->
     <string name="label_slogan">Your Movie Manager</string>

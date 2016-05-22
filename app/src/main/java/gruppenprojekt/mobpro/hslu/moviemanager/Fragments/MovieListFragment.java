@@ -7,11 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.io.Serializable;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
+import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
+import gruppenprojekt.mobpro.hslu.moviemanager.DetailsMovieActivity;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
 import gruppenprojekt.mobpro.hslu.moviemanager.SearchActivity;
 
@@ -43,6 +48,16 @@ public class MovieListFragment extends Fragment {
         dataRepository = new MovieDataRepository(new MovieDataAccess(getActivity()));
 
         listView = (ListView) view.findViewById(R.id.list_view_movie);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Movie movie = (Movie)listView.getItemAtPosition(i);
+
+                Intent intent = new Intent(getActivity(), DetailsMovieActivity.class);
+                intent.putExtra(DetailsMovieActivity.SELECTED_MOVIE_TAG, movie);
+                startActivity(intent);
+            }
+        });
 
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab_add);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

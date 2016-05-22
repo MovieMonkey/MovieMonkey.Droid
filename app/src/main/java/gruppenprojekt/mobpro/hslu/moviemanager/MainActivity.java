@@ -84,12 +84,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tag = fragment.getTag();
 
             transaction.replace(R.id.content_frame, fragment, tag);
-
-        } else if (id == R.id.nav_favorites) {
-
-        } else if (id == R.id.nav_backup) {
-
         }
+
         transaction.addToBackStack(tag);
         transaction.commit();
 
