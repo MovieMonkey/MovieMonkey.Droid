@@ -80,6 +80,8 @@ public class TheMovieDBHttpHandler {
             Log.e("MovieManager", "Not a trusted SSL-Certificate! \"" + this.getClass() + "\"");
         } catch (IOException ex) {
             Log.e("MovieManager", "Fehler in \"" + this.getClass() + "\"");
+        } catch (Exception ex){
+            Log.e("MovieManager", "Fehler: " + ex.getMessage());
         } finally {
             HelperClass.newInfoLine(this,"getHttpContent: End",SHOW_INFO);
             return content;

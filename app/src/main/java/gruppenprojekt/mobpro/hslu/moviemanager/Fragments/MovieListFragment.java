@@ -62,7 +62,6 @@ public class MovieListFragment extends Fragment {
         super.onStart();
 
         listView.setAdapter(new MovieAdapter(getActivity(),
-                dataRepository.load(),
-                POSTER_THUMBNAIL_PATH));
+                dataRepository.load(), true));
     }
 }

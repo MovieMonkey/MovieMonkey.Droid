@@ -8,6 +8,7 @@ import android.widget.TextView;
  */
 public class MovieHolder {
     public int position;
+    public String shortPathToThumbnail;
     public TextView txtTitle;
     public TextView txtGenre;
     public TextView txtYear;

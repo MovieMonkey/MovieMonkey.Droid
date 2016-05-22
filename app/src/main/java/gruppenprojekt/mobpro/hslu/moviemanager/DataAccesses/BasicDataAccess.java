@@ -19,6 +19,7 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
     public static final String KEY_GENRE = "Genre";
     public static final String KEY_YEAR = "Year";
     public static final String KEY_OVERVIEW = "Overview";
+    public static final String KEY_IMAGE_ID = "ImageID";
 
     public BasicDataAccess(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,6 +41,7 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
             KEY_TITLE + " TEXT, " +
             KEY_GENRE + " TEXT, " +
             KEY_YEAR + " INTEGER, " +
-            KEY_OVERVIEW + " TEXT " +
+            KEY_OVERVIEW + " TEXT, " +
+            KEY_IMAGE_ID + " TEXT " +
             ")";
 }

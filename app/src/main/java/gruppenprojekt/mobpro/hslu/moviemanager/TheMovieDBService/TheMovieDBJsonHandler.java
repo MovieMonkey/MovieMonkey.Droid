@@ -15,7 +15,7 @@ import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 public class TheMovieDBJsonHandler {
-    private final boolean SHOW_INFO = true;
+    private final boolean SHOW_INFO = false;
     private Map<Integer, String> genreIDs = new HashMap<>();
 
     public TheMovieDBJsonHandler(){}
@@ -75,18 +75,23 @@ public class TheMovieDBJsonHandler {
             if (jsonArray != null) {
                 for(int x = 0; x < jsonArray.length(); x++){
                     JSONObject jsonObject = jsonArray.getJSONObject(x);
-                    JSONArray jsonArrayGenre = jsonObject.optJSONArray("genre_ids");
 
-                    Movie currMovie = new Movie();
-                    currMovie.setThumbPathRemote(jsonObject.optString("poster_path","").toString());
-                    currMovie.setOriginalTitle(jsonObject.optString("original_title","No title found").toString());
-                    currMovie.setOverview(jsonObject.optString("overview","No Overview found").toString());
-                    currMovie.setYear(getYearFromReleaseDate(jsonObject.optString("release_date").toString()));
-                    currMovie.setGenre(getGenreListAsString(jsonArrayGenre));
-                    currMovie.setTmdbId(jsonObject.optInt("id",0));
-                    currMovie.setRating(jsonObject.optDouble("vote_average",0.0));
+                    //reject entry if year is not defined
+                    if(jsonObject.optString("release_date").toString().length() > 0){
+                        JSONArray jsonArrayGenre = jsonObject.optJSONArray("genre_ids");
 
-                    movieList.add(currMovie);
+                        Movie currMovie = new Movie();
+
+                        currMovie.setImageID(jsonObject.optString("poster_path","").toString());
+                        currMovie.setOriginalTitle(jsonObject.optString("original_title","No title found").toString());
+                        currMovie.setOverview(jsonObject.optString("overview","No Overview found").toString());
+                        currMovie.setYear(getYearFromReleaseDate(jsonObject.optString("release_date").toString()));
+                        currMovie.setGenre(getGenreListAsString(jsonArrayGenre));
+                        currMovie.setTmdbId(jsonObject.optInt("id",0));
+                        currMovie.setRating(jsonObject.optDouble("vote_average",0.0));
+
+                        movieList.add(currMovie);
+                    }
                 }
             }
         } catch(JSONException ex) {

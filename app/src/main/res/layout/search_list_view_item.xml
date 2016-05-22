@@ -12,9 +12,9 @@
 
         <ImageView
             android:id="@+id/search_list_view_row_image"
-            android:layout_width="30dp"
-            android:layout_height="45dp"
-            android:background="@drawable/border"/>
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -32,7 +32,8 @@
                 android:textSize="20sp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Batman: The Dark Knight"/>
+                android:text="Batman: The Dark Knight"
+                android:textColor="#222222" />
 
             <TextView
                 android:id="@+id/search_list_row_genre"
@@ -42,14 +43,14 @@
                 android:textSize="13sp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Batman: The Dark Knight"
+                android:text="Action, Adventure, Fanatsy"
                 android:layout_below="@+id/search_list_row_title"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/search_list_row_year"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="5dp"
             android:textSize="25sp"
             android:gravity="center_vertical|right"
@@ -58,7 +59,8 @@
             android:maxLines="1"
             android:text="2013"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textColor="#222222" />
     </RelativeLayout>
     <TextView
         android:layout_width="match_parent"

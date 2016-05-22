@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 
+import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.MovieHolder;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
@@ -20,19 +21,17 @@ import gruppenprojekt.mobpro.hslu.moviemanager.R;
  */
 public class TheMovieDBImageAsyncLoader extends AsyncTask<Void, Void, Bitmap>{
 
-    private URL imageUrl;
-    private int itemPosition;
-    private MovieHolder holder;
-    private String imageFileName;
     private final boolean SHOW_INFO = false;
+    private MovieHolder holder;
+    private boolean getLocalContent;
     private ContextWrapper cw;
+    private Movie movieItem;
 
-    public TheMovieDBImageAsyncLoader(int Position, MovieHolder view, URL newImageUrl, String newImageFileName, ContextWrapper newCW ){
-        this.itemPosition = Position;
-        this.imageUrl = newImageUrl;
+    public TheMovieDBImageAsyncLoader(Movie movieItem, MovieHolder view, ContextWrapper newCW, boolean getLocalContent ){
         this.holder = view;
-        this.imageFileName = newImageFileName;
         this.cw = newCW;
+        this.movieItem = movieItem;
+        this.getLocalContent = getLocalContent;
     }
 
     @Override
@@ -40,45 +39,37 @@ public class TheMovieDBImageAsyncLoader extends AsyncTask<Void, Void, Bitmap>{
         HelperClass.newInfoLine(this,"doInBackground: Begin",SHOW_INFO);
         Bitmap thumbnail;
 
-        String directoryPath = this.cw.getFilesDir().toString();
-        File file = new File(directoryPath + HelperClass.PATH_THUMBNAIL_CACHE + this.imageFileName);
+        if(getLocalContent) {
+            thumbnail = BitmapFactory.decodeFile(cw.getFilesDir().toString() + HelperClass.LOCAL_THUMBNAIL_PATH + this.movieItem.getImageID());
+        } else {
 
-        HelperClass.newInfoLine(this,"doInBackground: File: " + file.getPath(),SHOW_INFO);
-        //Check first if file exists on cache
-        if(!file.exists()) {
-            //If not, get it from the website and save it on the cache
+            //Load thumbnail from the website and save it on the cache
             TheMovieDBHttpHandler httpHandler = new TheMovieDBHttpHandler();
-            InputStream inputStream = httpHandler.getInputStreamFromHttpContent(this.imageUrl);
+            InputStream inputStream = httpHandler.getInputStreamFromHttpContent(HelperClass.getURL(HelperClass.REMOTE_POSTER_THUMBNAIL_PATH + this.movieItem.getImageID()));
 
-            //and save it to the cache
-            try (FileOutputStream fo = new FileOutputStream(file)) {
-                byte buffer[] = new byte[1024];
-                int length = 0;
-
-                while ((length = inputStream.read(buffer)) != -1) {
-                    fo.write(buffer, 0, length);
-                }
-
-                fo.flush();
-            } catch (Exception ex) {
-
-            }
+            thumbnail = BitmapFactory.decodeStream(inputStream);
         }
 
-        //get thumbnail from cache
-        thumbnail = BitmapFactory.decodeFile(directoryPath + HelperClass.PATH_THUMBNAIL_CACHE + this.imageFileName);
-
         HelperClass.newInfoLine(this,"doInBackground: End",SHOW_INFO);
+
         return thumbnail;
     }
 
     @Override
     protected void onPostExecute(Bitmap newThumbnail)
     {
-        if(isCancelled() || newThumbnail == null){
-            this.holder.imgCover.setImageResource(R.mipmap.moviemanager_default_picture);
+        Bitmap currBitmap;
+
+        if(newThumbnail == null){
+            currBitmap = BitmapFactory.decodeResource(cw.getResources(),R.mipmap.moviemanager_default_picture);
         } else {
-            this.holder.imgCover.setImageBitmap(newThumbnail);
+            currBitmap = newThumbnail;
         }
+
+        if(new String(this.holder.txtTitle.getText().toString()).equals(this.movieItem.getOriginalTitle())) {
+            this.holder.imgCover.setImageBitmap(currBitmap);
+        }
+
+        movieItem.setThumbnail(currBitmap);
     }
 }

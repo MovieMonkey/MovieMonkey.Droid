@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,11 +18,7 @@ import gruppenprojekt.mobpro.hslu.moviemanager.Interfaces.MovieGrabberService;
 import gruppenprojekt.mobpro.hslu.moviemanager.R;
 
 public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
-
-    private final String POSTER_THUMBNAIL_PATH = "https://image.tmdb.org/t/p/w185";
-    private final String POSTER_ORIGINAL_PATH = "https://image.tmdb.org/t/p/original";
     private Context context;
-
 
     public TheMovieDBService(Context newContext){
         this.context = newContext;
@@ -39,7 +36,7 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
             keyword = keyword.replace("&","%26");
 
             //First clear cache
-            HelperClass.clearThumbnailCache(context);
+            //HelperClass.clearThumbnailCache(context);
 
             //Then start search
             TheMovieDBAsyncLoader loader = new TheMovieDBAsyncLoader(this, keyword);
@@ -50,18 +47,17 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
     @Override
     public void asyncComplete(List<Movie> movieList){
         Log.i("MovieManager", "AsyncComplete");
-        Log.i("MovieManager", "Found " + movieList.size() + " entries!");
 
-        ListView listView = (ListView) ((Activity) this.context).findViewById(R.id.search_ListView);
-        MovieAdapter adapter = new MovieAdapter((Activity) this.context, movieList, POSTER_THUMBNAIL_PATH);
-        listView.setAdapter(adapter);
-    }
+        if(movieList == null) {
+            Log.i("MovieManager", "No entry found!");
+            Toast.makeText(this.context,"No Entry found. Maybe you searched for a TV-Show!",Toast.LENGTH_SHORT).show();
+        } else {
+            Log.i("MovieManager", "Found " + movieList.size() + " entries!");
+            Toast.makeText(this.context,movieList.size() + " Entries found!",Toast.LENGTH_SHORT).show();
 
-    private URL setURL(String newString){
-        try{
-            return new URL(newString);
-        } catch(MalformedURLException ex){
-            return null;
+            ListView listView = (ListView) ((Activity) this.context).findViewById(R.id.search_ListView);
+            MovieAdapter adapter = new MovieAdapter((Activity) this.context, movieList, false);
+            listView.setAdapter(adapter);
         }
     }
 }

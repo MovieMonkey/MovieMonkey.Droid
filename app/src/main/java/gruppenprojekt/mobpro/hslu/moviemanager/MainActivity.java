@@ -1,7 +1,5 @@
 package gruppenprojekt.mobpro.hslu.moviemanager;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.Fragments.MovieListFragment;
 import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;

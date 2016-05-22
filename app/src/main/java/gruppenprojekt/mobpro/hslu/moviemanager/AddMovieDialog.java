@@ -51,6 +51,9 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
                 new MovieDataRepository(new MovieDataAccess(currentActivity))
                         .save(selectedMovie);
 
+                HelperClass.savePoster(getContext(),selectedMovie.getImageID());
+                HelperClass.saveThumbnail(getContext(),selectedMovie.getImageID(),selectedMovie.getThumbnail());
+
                 Toast.makeText(currentActivity, "Erfolgreich gespeichert",
                         Toast.LENGTH_LONG).show();
 
@@ -74,7 +77,7 @@ public class AddMovieDialog extends Dialog implements View.OnClickListener {
         textViewDescription = (TextView) findViewById(R.id.text_view_movie_description);
 
         // show image
-
+        imageViewThumbnail.setImageBitmap(selectedMovie.getThumbnail());
         textViewTitle.setText(selectedMovie.getOriginalTitle());
         textViewGenre.setText(selectedMovie.getGenre());
         textViewYear.setText(String.valueOf(selectedMovie.getYear()));

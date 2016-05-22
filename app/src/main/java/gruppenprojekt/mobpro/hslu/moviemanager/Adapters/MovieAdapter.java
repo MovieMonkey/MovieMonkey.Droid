@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
@@ -23,15 +25,17 @@ import gruppenprojekt.mobpro.hslu.moviemanager.TheMovieDBService.TheMovieDBImage
  */
 public class MovieAdapter extends ArrayAdapter<Movie>{
     private final boolean SHOW_INFO = false;
+    private final boolean isLocal;
     private final Activity context;
     private final List<Movie> items;
-    private String posterThumbnailPath;
 
-    public MovieAdapter(Activity context, List<Movie> movies, String thumbNailPath){
+    public MovieAdapter(Activity context, List<Movie> movies, boolean isLocal){
         super(context, R.layout.search_list_view_item, R.id.search_list_row_title);
+        this.isLocal = isLocal;
         this.context = context;
         this.items = movies;
-        this.posterThumbnailPath = thumbNailPath;
+
+        Collections.sort(this.items);
     }
 
     @Override
@@ -53,11 +57,15 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         HelperClass.newInfoLine(this,"getView: Begin",SHOW_INFO);
-        HelperClass.newInfoLine(this,"getView: Current position: " + position + ": " + items.get(position).getThumbPathRemote(),SHOW_INFO);
+        HelperClass.newInfoLine(this,"getView: Current position: " + position + ": " + items.get(position).getImageID(),SHOW_INFO);
 
         View view = convertView;
+        Movie movieItem = items.get(position);
         MovieHolder holder;
 
+        //Adapter fills automatically up the visible Listview-Area with Listview-Items.
+        //Count of visible items is always the same. When the user is scrolling, the adapter automatically
+        //recycle the items and simulate a "scrolling"
         if(view == null){
             LayoutInflater inflater = context.getLayoutInflater();
             view = inflater.inflate(R.layout.search_list_view_item,parent, false);
@@ -65,6 +73,7 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
             //set up MovieHolder
             holder = new MovieHolder();
             holder.position = position;
+            holder.shortPathToThumbnail = movieItem.getImageID();
             holder.txtTitle = (TextView) view.findViewById(R.id.search_list_row_title);
             holder.txtGenre = (TextView) view.findViewById(R.id.search_list_row_genre);
             holder.txtYear = (TextView) view.findViewById(R.id.search_list_row_year);
@@ -76,20 +85,24 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
             holder = (MovieHolder) view.getTag();
         }
 
-        Movie movieItem = items.get(position);
-
         if(movieItem != null){
+            holder.position = position;
+            holder.shortPathToThumbnail = movieItem.getImageID();
             holder.txtTitle.setText(movieItem.getOriginalTitle());
             holder.txtGenre.setText(movieItem.getGenre());
             holder.txtYear.setText(String.valueOf(movieItem.getYear()));
+            holder.imgCover.setImageBitmap(null);
 
-            new TheMovieDBImageAsyncLoader(
-                    position,
-                    holder,
-                    HelperClass.setURL(posterThumbnailPath + movieItem.getThumbPathRemote()),
-                    movieItem.getThumbPathRemote(),
-                    new ContextWrapper(this.context)
-            ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,null);
+            if(movieItem.getThumbnail() == null){
+                new TheMovieDBImageAsyncLoader(
+                        movieItem,
+                        holder,
+                        new ContextWrapper(this.context),
+                        this.isLocal
+                ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,null);
+            } else {
+                holder.imgCover.setImageBitmap(movieItem.getThumbnail());
+            }
         }
 
         HelperClass.newInfoLine(this,"getView: End",SHOW_INFO);

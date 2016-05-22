@@ -1,20 +1,21 @@
 package gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
-public class Movie {
+public class Movie implements Comparable<Movie>{
     private int id;
     private int tmdbId;
     private int imdbId;
+    private String imageID;
     private int year;
     private String originalTitle;
     private String genre;
     private String overview;
-    private String thumbPathBigLocal;
-    private String thumbPathSmallLocal;
-    private String thumbPathRemote;
     private List<String> actors;
     private double rating;
+    private Bitmap thumbnail;
 
     public Movie(){}
 
@@ -32,11 +33,11 @@ public class Movie {
         this.tmdbId = tmdbId;
     }
 
-    public int getImdbId() {
-        return imdbId;
+    public String getImageID() {
+        return this.imageID;
     }
-    public void setImdbId(int imdbId) {
-        this.imdbId = imdbId;
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
     }
 
     public int getYear() {
@@ -67,27 +68,6 @@ public class Movie {
         this.overview = overview;
     }
 
-    public String getThumbPathBigLocal() {
-        return thumbPathBigLocal;
-    }
-    public void setThumbPathBigLocal(String thumpPathBigLocal) {
-        this.thumbPathBigLocal = thumpPathBigLocal;
-    }
-
-    public String getThumbPathSmallLocal() {
-        return thumbPathSmallLocal;
-    }
-    public void setThumbPathSmallLocal(String thumpPathSmallLocal) {
-        this.thumbPathSmallLocal = thumpPathSmallLocal;
-    }
-
-    public String getThumbPathRemote() {
-        return thumbPathRemote;
-    }
-    public void setThumbPathRemote(String thumpPathRemote) {
-        this.thumbPathRemote = thumpPathRemote;
-    }
-
     public List<String> getActors() {
         return actors;
     }
@@ -100,5 +80,20 @@ public class Movie {
     }
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Bitmap getThumbnail(){
+        return this.thumbnail;
+    }
+    public void setThumbnail(Bitmap newThumbnail){
+        this.thumbnail = newThumbnail;
+    }
+
+    public int compareTo(Movie movieItem){
+        //Absteigend sortieren
+        //return Integer.compare(this.year, movieItem.getYear());
+
+        //Aufsteigend sortieren
+        return Integer.compare(movieItem.getYear(), this.year);
     }
 }

@@ -28,7 +28,7 @@ public class TheMovieDBAsyncLoader extends AsyncTask<Void, Void, List<Movie>>
         List<Movie> movies = null;
 
         TheMovieDBHttpHandler httpHandler = new TheMovieDBHttpHandler();
-        URL searchUrl = HelperClass.setURL(HelperClass.SEARCH_URL + this.keyword + "&page=1");
+        URL searchUrl = HelperClass.getURL(HelperClass.SEARCH_URL + this.keyword + "&page=1");
 
         //Load first page
         String jsonResult = httpHandler.getTextFromHttpContent(searchUrl);
@@ -43,7 +43,7 @@ public class TheMovieDBAsyncLoader extends AsyncTask<Void, Void, List<Movie>>
 
             if(totalResults > 0){
                 //First prepare genres
-                searchUrl = HelperClass.setURL(HelperClass.GENRE_URL);
+                searchUrl = HelperClass.getURL(HelperClass.GENRE_URL);
                 String jsonGenre = httpHandler.getTextFromHttpContent(searchUrl);
                 jsonHandler.setGenreIDs(jsonGenre);
 
@@ -56,7 +56,7 @@ public class TheMovieDBAsyncLoader extends AsyncTask<Void, Void, List<Movie>>
 
                 //Load movies from the other pages
                 for(int x = 2; x <= totalPages; x++){
-                    searchUrl = HelperClass.setURL(HelperClass.SEARCH_URL + this.keyword + "&page=" + x);
+                    searchUrl = HelperClass.getURL(HelperClass.SEARCH_URL + this.keyword + "&page=" + x);
                     jsonResult = httpHandler.getTextFromHttpContent(searchUrl);
                     movies.addAll(jsonHandler.getMovieList(jsonResult));
                 }
