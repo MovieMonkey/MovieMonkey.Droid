@@ -8,74 +8,74 @@
     <include
         layout="@layout/toolbar_actionbar" />
 
-    <RelativeLayout
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-        <ImageView
-            android:id="@+id/search_list_view_row_image"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:scaleType="fitXY"/>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout"
-            android:layout_toStartOf="@+id/search_list_row_year"
-            android:layout_toEndOf="@+id/search_list_view_row_image">
-
-            <TextView
-                android:id="@+id/search_list_row_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textSize="20sp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Batman: The Dark Knight"
-                android:textColor="#222222" />
-
-            <TextView
-                android:id="@+id/search_list_row_genre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textSize="13sp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Batman: The Dark Knight"
-                android:layout_below="@+id/search_list_row_title"/>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/search_list_row_year"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="25sp"
-            android:gravity="center_vertical|end"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="2013"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:textColor="#222222" />
-    </RelativeLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="15dp"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/text_view_movie_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#222222"
-        android:text="Content und so..."/>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView style="@style/CustomStyleTitle" android:id="@+id/movieTitle" android:text="Ninja Turtles Super"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="225dp"
+                    android:padding="1dp"
+                    android:background="@color/black"
+                    android:id="@+id/movieThumbnail"
+                    android:scaleType="fitXY"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView style="@style/CustomStyleSmallTitle" android:text="Genre:"/>
+                    <TextView style="@style/CustomStyleInfo" android:id="@+id/movieGenre" android:text="Action, Science-Fiction, Romantic"/>
+
+                    <TextView style="@style/CustomStyleSmallTitle" android:text="Year:"/>
+                    <TextView style="@style/CustomStyleInfo" android:id="@+id/movieYear" android:text="2013"/>
+
+                    <TextView style="@style/CustomStyleSmallTitle" android:text="Rating:"/>
+
+                    <RatingBar
+                        android:id="@+id/movieRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progressTint="@color/colorRatingBarPrimary"
+                        android:secondaryProgressTint="@color/colorRatingBarSecondary"
+                        android:clickable="true"
+                        android:stepSize="0.01"
+                        android:numStars="10"
+                        style="?android:attr/ratingBarStyleSmall"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView style="@style/CustomStyleInfo"
+                            android:id="@+id/movieRatingInfo"
+                            android:textAlignment="textStart"
+                            android:layout_marginRight="15dp"/>
+                        <TextView style="@style/CustomStyleInfo"
+                            android:id="@+id/movieRatingCount"
+                            android:textAlignment="textEnd"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView style="@style/CustomStyleSmallTitle" android:text="Overview:"/>
+            <TextView style="@style/CustomStyleInfo" android:id="@+id/movieOverview" android:text="xxxx"/>
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>

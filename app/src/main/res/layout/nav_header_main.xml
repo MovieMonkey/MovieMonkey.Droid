@@ -5,20 +5,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:background="@color/colorPrimaryDark"
-                android:padding="16dp">
+                android:paddingTop="16dp">
   <LinearLayout
       android:orientation="horizontal"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
-      android:layout_alignParentTop="true">
+      android:layout_alignParentTop="true"
+      android:paddingTop="20dp">
       <ImageView
-        android:src="@drawable/ic_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:id="@+id/image_view_row_icon"
-        android:layout_marginTop="@dimen/element_margin_medium"
-        android:scaleType="fitStart" />
+        android:src="@drawable/moviemanager_icon_big"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

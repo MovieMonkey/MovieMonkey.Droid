@@ -43,7 +43,7 @@ public class MovieListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
 
-        getActivity().setTitle("Filme");
+        getActivity().setTitle("Movies");
 
         dataRepository = new MovieDataRepository(new MovieDataAccess(getActivity()));
 

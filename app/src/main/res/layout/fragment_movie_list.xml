@@ -6,7 +6,10 @@
     <ListView
         android:id="@+id/list_view_movie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"

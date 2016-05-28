@@ -1,19 +1,24 @@
 package gruppenprojekt.mobpro.hslu.moviemanager;
 
-import android.content.ClipData;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
 import gruppenprojekt.mobpro.hslu.moviemanager.DatabaseModels.Movie;
+import gruppenprojekt.mobpro.hslu.moviemanager.HelperClasses.HelperClass;
 
 public class DetailsMovieActivity extends AppCompatActivity {
 
@@ -26,7 +31,9 @@ public class DetailsMovieActivity extends AppCompatActivity {
     private TextView textViewTitle;
     private TextView textViewGenre;
     private TextView textViewYear;
-    private TextView textViewDescription;
+    private TextView textViewOverview;
+    private RatingBar ratingBarRating;
+    private TextView textViewRatingInfo;
 
     private Menu menu;
 
@@ -44,17 +51,29 @@ public class DetailsMovieActivity extends AppCompatActivity {
 
         setTitle("Details");
 
-        imageViewThumbnail = (ImageView) findViewById(R.id.search_list_view_row_image);
-        textViewTitle = (TextView) findViewById(R.id.search_list_row_title);
-        textViewGenre = (TextView) findViewById(R.id.search_list_row_genre);
-        textViewYear = (TextView) findViewById(R.id.search_list_row_year);
-        textViewDescription = (TextView) findViewById(R.id.text_view_movie_description);
-        
-        imageViewThumbnail.setImageBitmap(selectedMovie.getThumbnail());
+        imageViewThumbnail = (ImageView) findViewById(R.id.movieThumbnail);
+        textViewTitle = (TextView) findViewById(R.id.movieTitle);
+        textViewGenre = (TextView) findViewById(R.id.movieGenre);
+        textViewYear = (TextView) findViewById(R.id.movieYear);
+        textViewOverview = (TextView) findViewById(R.id.movieOverview);
+        ratingBarRating = (RatingBar) findViewById(R.id.movieRating);
+        textViewRatingInfo = (TextView) findViewById(R.id.movieRatingInfo);
+
+        //set thumbnail
+        Bitmap thumbnail = BitmapFactory.decodeFile(getFilesDir() + HelperClass.LOCAL_POSTER_PATH + selectedMovie.getImageID());
+
+        if(thumbnail == null){
+            thumbnail = BitmapFactory.decodeResource(getResources(),R.drawable.moviemanager_icon_no_image);
+        }
+
+        imageViewThumbnail.setImageBitmap(thumbnail);
+
         textViewTitle.setText(selectedMovie.getOriginalTitle());
         textViewGenre.setText(selectedMovie.getGenre());
         textViewYear.setText(String.valueOf(selectedMovie.getYear()));
-        textViewDescription.setText(selectedMovie.getOverview());
+        ratingBarRating.setRating((float) selectedMovie.getRating());
+        textViewRatingInfo.setText(String.valueOf(selectedMovie.getRating() + "/10    (" + String.format("%,d",selectedMovie.getRatingCount()).replace(",","'") + ") votes"));
+        textViewOverview.setText(selectedMovie.getOverview());
     }
 
     @Override

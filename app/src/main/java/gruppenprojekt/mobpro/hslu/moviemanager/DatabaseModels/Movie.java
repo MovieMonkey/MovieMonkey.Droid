@@ -16,6 +16,7 @@ public class Movie implements Comparable<Movie> {
     private String overview;
     private List<String> actors;
     private double rating;
+    private int ratingCount;
     private Bitmap thumbnail;
     private Boolean isFavorite;
 
@@ -82,6 +83,13 @@ public class Movie implements Comparable<Movie> {
     }
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public int getRatingCount() {
+        return this.ratingCount;
+    }
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
     }
 
     public Bitmap getThumbnail(){

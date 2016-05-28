@@ -20,6 +20,8 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
     public static final String KEY_YEAR = "Year";
     public static final String KEY_OVERVIEW = "Overview";
     public static final String KEY_IMAGE_ID = "ImageID";
+    public static final String KEY_RATING = "Rating";
+    public static final String KEY_RATING_COUNT = "RatingCount";
     public static final String KEY_IS_FAVORITE = "IsFavorite";
 
     public BasicDataAccess(Context context) {
@@ -44,6 +46,8 @@ public abstract class BasicDataAccess extends SQLiteOpenHelper {
             KEY_YEAR + " INTEGER, " +
             KEY_OVERVIEW + " TEXT, " +
             KEY_IMAGE_ID + " TEXT, " +
+            KEY_RATING + " REAL, " +
+            KEY_RATING_COUNT + " INTEGER, " +
             KEY_IS_FAVORITE + " INTEGER " +
             ")";
 }

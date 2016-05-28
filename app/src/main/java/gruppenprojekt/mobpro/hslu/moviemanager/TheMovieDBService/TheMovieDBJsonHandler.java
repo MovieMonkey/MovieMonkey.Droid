@@ -88,6 +88,7 @@ public class TheMovieDBJsonHandler {
                         currMovie.setYear(getYearFromReleaseDate(jsonObject.optString("release_date").toString()));
                         currMovie.setGenre(getGenreListAsString(jsonArrayGenre));
                         currMovie.setTmdbId(jsonObject.optInt("id",0));
+                        currMovie.setRatingCount(jsonObject.optInt("vote_count",0));
                         currMovie.setRating(jsonObject.optDouble("vote_average",0.0));
 
                         movieList.add(currMovie);
