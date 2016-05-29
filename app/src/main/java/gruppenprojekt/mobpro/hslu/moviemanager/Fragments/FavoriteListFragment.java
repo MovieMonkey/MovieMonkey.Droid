@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import gruppenprojekt.mobpro.hslu.moviemanager.Adapters.MovieAdapter;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataAccesses.MovieDataAccess;
 import gruppenprojekt.mobpro.hslu.moviemanager.DataRepositories.MovieDataRepository;
@@ -68,7 +70,14 @@ public class FavoriteListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        List<Movie> movieList = dataRepository.load(true);
+
         listView.setAdapter(new MovieAdapter(getActivity(),
-                dataRepository.load(true), true));
+                movieList, true));
+
+        (getActivity().findViewById(R.id.text_view_list_placeholder))
+                .setVisibility(movieList.size() > 0
+                        ? View.INVISIBLE
+                        : View.VISIBLE);
     }
 }

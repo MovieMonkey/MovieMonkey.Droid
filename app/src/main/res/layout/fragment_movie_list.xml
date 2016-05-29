@@ -11,6 +11,13 @@
         android:divider="@null"
         android:dividerHeight="0dp"/>
 
+    <TextView
+        android:id="@+id/text_view_list_placeholder"
+        android:hint="You've added no movies so far. Tap the plus button below to do so."
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
