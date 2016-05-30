@@ -19,14 +19,17 @@ public class TheMovieDBHttpHandler {
     private final boolean SHOW_INFO = false;
 
     public String getTextFromHttpContent(URL newUrl){
-        String resultText;
+        String resultText = "";
         InputStream content = getHttpContent(newUrl);
-        resultText = getTextFromInputStream(content);
 
-        try {
-            content.close();
-        } catch (IOException ex){
-            Log.e("MovieManager", "Couldn't close HTTPInputStream");
+        if(content != null) {
+            resultText = getTextFromInputStream(content);
+
+            try {
+                content.close();
+            } catch (IOException ex){
+                Log.e("MovieManager", "Couldn't close HTTPInputStream");
+            }
         }
 
         return resultText;

@@ -58,7 +58,15 @@ public class TheMovieDBAsyncLoader extends AsyncTask<Void, Void, List<Movie>>
                 for(int x = 2; x <= totalPages; x++){
                     searchUrl = HelperClass.getURL(HelperClass.SEARCH_URL + this.keyword + "&page=" + x);
                     jsonResult = httpHandler.getTextFromHttpContent(searchUrl);
-                    movies.addAll(jsonHandler.getMovieList(jsonResult));
+
+                    if(jsonResult != null){
+                        movies.addAll(jsonHandler.getMovieList(jsonResult));
+                    }
+
+                    //Quick and Dirty save
+                    if(movies.size() > 500){
+                        break;
+                    }
                 }
             }
         }

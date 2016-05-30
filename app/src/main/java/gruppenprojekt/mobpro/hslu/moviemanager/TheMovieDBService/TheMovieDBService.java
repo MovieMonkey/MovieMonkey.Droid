@@ -50,10 +50,15 @@ public class TheMovieDBService implements MovieGrabberService, AsyncDelegate {
 
         if(movieList == null) {
             Log.i("MovieManager", "No entry found!");
-            Toast.makeText(this.context,"No Entry found. Maybe you searched for a TV-Show!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.context,"No Entry found. Maybe you searched for a TV-Show instead of a movie!",Toast.LENGTH_SHORT).show();
         } else {
+            if(movieList.size() > 500){
+                Toast.makeText(this.context,"500+ entries found!",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this.context,movieList.size() + " entries found!",Toast.LENGTH_SHORT).show();
+            }
+
             Log.i("MovieManager", "Found " + movieList.size() + " entries!");
-            Toast.makeText(this.context,movieList.size() + " Entries found!",Toast.LENGTH_SHORT).show();
 
             ListView listView = (ListView) ((Activity) this.context).findViewById(R.id.search_ListView);
             MovieAdapter adapter = new MovieAdapter((Activity) this.context, movieList, false);
